@@ -1,0 +1,14 @@
+# install packages
+sudo apt-get install tor
+sudo apt-get install openssh-client
+
+# Add these lines to ~/.ssh/config
+host hidden
+  hostname $REPLACE_WITH_HOSTNAME_FROM_SERVER
+  proxyCommand torsocks nc %h %p
+
+# Add these lines to /etc/tor/torrc
+HidServAuth $REPLACE_WITH_HOSTNAME_AND_AUTH_STRING_FROM_SERVER
+
+# start tor service by running tor and connect with the following command
+ssh hidden

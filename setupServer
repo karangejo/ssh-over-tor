@@ -1,0 +1,22 @@
+# install packages
+sudo apt-get install tor
+sudo apt-get install openssh-server
+
+# make hidden service directory and change permissions
+sudo mkdir /var/lib/tor/torssh
+sudo chown -R debian-tor /var/lib/tor/torssh
+sudo chmod 0700 /var/lib/tor/torssh
+
+# Add these lines to /etc/tor/torrc
+HiddenServiceDir /var/lib/tor/torssh/
+HiddenServicePort 22 127.0.0.1:22
+HiddenServiceAuthorizeClient stealth torssh
+
+# Add this line to ~/.ssh/config
+ListenAddress 127.0.0.1
+
+# restart services
+service tor restart
+service ssh restart
+
+# grab the info the file /var/lib/tor/torssh/hostname

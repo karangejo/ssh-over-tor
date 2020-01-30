@@ -12,3 +12,6 @@ HidServAuth $REPLACE_WITH_HOSTNAME_AND_AUTH_STRING_FROM_SERVER
 
 # start tor service by running tor and connect with the following command
 ssh hidden
+
+# start a vnc session over tor and ssh might need an -l user if remote user is different
+$ ssh -L 6000:localhost:5900 hidden env DISPLAY=:0 x11vnc -localhost
